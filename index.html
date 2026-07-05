@@ -1,337 +1,905 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>KCYM Mattara - FIFA World Cup Prediction Challenge 2026</title>
-    
-    <!-- Google Fonts for Premium Typography -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;700;800;900&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>KCYM SMYM Mattara FIFA World Cup Prediction Challenge</title>
+<meta name="description" content="Join the KCYM SMYM Mattara FIFA World Cup Prediction Challenge. Predict knockout matches and stand a chance to win exciting prizes.">
 
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        navy: '#081B33',
-                        navy_light: '#0D2644',
-                        green: { DEFAULT: '#0E8F52', light: '#16C06F' },
-                        gold: { DEFAULT: '#F4C542', light: '#F9DB82' },
-                    },
-                    fontFamily: {
-                        sans: ['Poppins', 'sans-serif'],
-                        heading: ['Montserrat', 'sans-serif'],
-                    },
-                    animation: {
-                        'float': 'float 4s ease-in-out infinite',
-                        'blob': 'blob 7s infinite',
-                    },
-                    keyframes: {
-                        float: {
-                            '0%, 100%': { transform: 'translateY(0)' },
-                            '50%': { transform: 'translateY(-15px)' },
-                        },
-                        blob: {
-                            '0%': { transform: 'translate(0px, 0px) scale(1)' },
-                            '33%': { transform: 'translate(30px, -50px) scale(1.1)' },
-                            '66%': { transform: 'translate(-20px, 20px) scale(0.9)' },
-                            '100%': { transform: 'translate(0px, 0px) scale(1)' },
-                        }
-                    }
-                }
-            }
-        }
-    </script>
+<!-- Open Graph -->
+<meta property="og:type" content="website">
+<meta property="og:title" content="KCYM SMYM Mattara FIFA World Cup Prediction Challenge">
+<meta property="og:description" content="Predict every knockout match, compete with fellow football fans, and stand a chance to win exciting prizes.">
+<meta property="og:image" content="https://upload.wikimedia.org/wikipedia/en/6/66/FIFA_World_Cup_Trophy.png">
 
-    <style>
-        body {
-            background-color: #051122; /* Deepest navy */
-            color: #ffffff;
-            overflow-x: hidden;
-        }
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="KCYM SMYM Mattara FIFA World Cup Prediction Challenge">
+<meta name="twitter:description" content="Predict every knockout match, compete with fellow football fans, and stand a chance to win exciting prizes.">
 
-        /* Ambient Background Glows */
-        .ambient-glow {
-            position: fixed;
-            border-radius: 50%;
-            filter: blur(100px);
-            z-index: -1;
-            opacity: 0.4;
-        }
-        .glow-1 { top: -10%; left: -10%; width: 50vw; height: 50vw; background: rgba(14, 143, 82, 0.3); }
-        .glow-2 { bottom: -10%; right: -10%; width: 40vw; height: 40vw; background: rgba(244, 197, 66, 0.2); }
-        .glow-3 { top: 40%; left: 50%; width: 30vw; height: 30vw; background: rgba(22, 192, 111, 0.15); transform: translate(-50%, -50%); }
+<!-- Favicon (inline SVG, no external files needed) -->
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='46' fill='%230A1628' stroke='%23E8B93B' stroke-width='4'/%3E%3Cpath d='M50 22 L64 32 L59 49 L41 49 L36 32 Z' fill='%23E8B93B'/%3E%3C/svg%3E">
 
-        /* Custom Scrollbar */
-        ::-webkit-scrollbar { width: 10px; }
-        ::-webkit-scrollbar-track { background: #081B33; }
-        ::-webkit-scrollbar-thumb { background: #16C06F; border-radius: 5px; }
-        ::-webkit-scrollbar-thumb:hover { background: #0E8F52; }
+<!-- Typography: condensed scoreboard display face + readable body face + tabular mono for countdown/data -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@500;600;700&display=swap" rel="stylesheet">
 
-        /* Glassmorphism Classes */
-        .glass-panel {
-            background: rgba(255, 255, 255, 0.03);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-        }
+<style>
+  /* ============================================================
+     DESIGN TOKENS
+     ============================================================ */
+  :root{
+    /* Colors */
+    --navy-deep:      #060f1f;
+    --navy:           #0a1930;
+    --navy-card:      #0f2340;
+    --navy-card-2:    #132a4a;
+    --green:          #0d7a45;
+    --green-bright:   #17a862;
+    --gold:           #e8b93b;
+    --gold-bright:    #f7d264;
+    --white:          #f5f7fb;
+    --gray:           #8a94a8;
+    --gray-dark:      #1c2733;
+    --line:           rgba(245,247,251,0.08);
 
-        .glass-card-hover {
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-        .glass-card-hover:hover {
-            transform: translateY(-8px);
-            background: rgba(255, 255, 255, 0.05);
-            border-color: rgba(244, 197, 66, 0.5); /* Gold border on hover */
-            box-shadow: 0 15px 35px rgba(244, 197, 66, 0.1);
-        }
+    /* Type */
+    --font-display: 'Anton', 'Arial Narrow', sans-serif;
+    --font-body: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    --font-mono: 'IBM Plex Mono', 'SFMono-Regular', Consolas, monospace;
 
-        /* Scroll Reveal Animations */
-        .reveal-up {
-            opacity: 0;
-            transform: translateY(40px);
-            transition: all 0.8s cubic-bezier(0.5, 0, 0, 1);
-        }
-        .reveal-up.active {
-            opacity: 1;
-            transform: translateY(0);
-        }
+    /* Layout */
+    --max-w: 1280px;
+    --radius-lg: 24px;
+    --radius-md: 16px;
+    --radius-sm: 10px;
+    --space-xs: 8px;
+    --space-sm: 16px;
+    --space-md: 32px;
+    --space-lg: 64px;
+    --space-xl: 112px;
 
-        /* Gradient Text */
-        .text-gradient-green {
-            background: linear-gradient(135deg, #16C06F, #0E8F52);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-        .text-gradient-gold {
-            background: linear-gradient(135deg, #F9DB82, #F4C542);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-    </style>
+    /* Motion */
+    --ease: cubic-bezier(.16,.84,.44,1);
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    *{ animation-duration: 0.001ms !important; animation-iteration-count: 1 !important; transition-duration: 0.001ms !important; scroll-behavior: auto !important; }
+  }
+
+  *,*::before,*::after{ box-sizing: border-box; margin:0; padding:0; }
+  html{ scroll-behavior: smooth; }
+  body{
+    background: var(--navy-deep);
+    color: var(--white);
+    font-family: var(--font-body);
+    line-height: 1.5;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+  }
+  img{ max-width:100%; display:block; }
+  a{ color:inherit; text-decoration:none; }
+  ul{ list-style:none; }
+  button{ font-family:inherit; cursor:pointer; border:none; background:none; color:inherit; }
+
+  .container{ max-width: var(--max-w); margin: 0 auto; padding: 0 24px; }
+  @media (min-width: 1600px){ .container{ max-width: 1480px; } }
+
+  :focus-visible{ outline: 2px solid var(--gold-bright); outline-offset: 3px; border-radius: 4px; }
+
+  .eyebrow{
+    font-family: var(--font-mono);
+    font-size: 12px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--gold-bright);
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .eyebrow::before{
+    content:"";
+    width: 22px; height: 2px;
+    background: var(--gold-bright);
+    display:inline-block;
+  }
+
+  .section-title{
+    font-family: var(--font-display);
+    font-weight: 400;
+    letter-spacing: 0.01em;
+    text-transform: uppercase;
+    font-size: clamp(28px, 4vw, 44px);
+    line-height: 1.05;
+    margin-top: 10px;
+  }
+
+  .btn{
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    font-family: var(--font-body);
+    font-weight: 700;
+    font-size: 16px;
+    letter-spacing: 0.01em;
+    padding: 16px 34px;
+    border-radius: 999px;
+    transition: transform .35s var(--ease), box-shadow .35s var(--ease), background .35s var(--ease);
+    min-height: 52px;
+  }
+  .btn-primary{
+    background: linear-gradient(135deg, var(--green-bright), var(--green));
+    color: var(--white);
+    box-shadow: 0 8px 30px -8px rgba(23,168,98,0.65);
+  }
+  .btn-primary:hover{ transform: translateY(-2px); box-shadow: 0 14px 34px -8px rgba(23,168,98,0.8); }
+  .btn-ghost{
+    background: rgba(245,247,251,0.06);
+    border: 1px solid var(--line);
+    color: var(--white);
+    backdrop-filter: blur(8px);
+  }
+  .btn-ghost:hover{ background: rgba(245,247,251,0.12); }
+
+  /* ============================================================
+     NAVBAR
+     ============================================================ */
+  .navbar{
+    position: fixed; top:0; left:0; right:0; z-index: 200;
+    padding: 18px 0;
+    transition: background .4s var(--ease), backdrop-filter .4s var(--ease), padding .4s var(--ease), border-color .4s var(--ease);
+    border-bottom: 1px solid transparent;
+  }
+  .navbar.scrolled{
+    background: rgba(6,15,31,0.72);
+    backdrop-filter: blur(16px) saturate(140%);
+    -webkit-backdrop-filter: blur(16px) saturate(140%);
+    border-bottom: 1px solid var(--line);
+    padding: 12px 0;
+  }
+  .nav-inner{ display:flex; align-items:center; justify-content:space-between; gap: 20px; }
+  .nav-brand{ display:flex; align-items:center; gap:12px; }
+  .nav-brand img{ height: 34px; width:auto; border-radius: 6px; }
+  .nav-brand-text{ font-family: var(--font-display); font-size:16px; letter-spacing: .04em; text-transform: uppercase; }
+  .nav-links{ display:flex; align-items:center; gap: 8px; }
+  .nav-links a{
+    font-size: 14px; font-weight: 600; padding: 10px 16px; border-radius: 999px;
+    transition: background .25s var(--ease), color .25s var(--ease);
+  }
+  .nav-links a:hover{ background: rgba(245,247,251,0.08); color: var(--gold-bright); }
+  .nav-cta{ display:flex; align-items:center; gap:14px; }
+  .nav-cta .btn{ padding: 11px 22px; font-size: 14px; min-height: auto; }
+
+  .hamburger{
+    display:none; flex-direction:column; gap:5px; width: 44px; height:44px;
+    align-items:center; justify-content:center; border-radius: 10px;
+  }
+  .hamburger span{ width: 22px; height: 2px; background: var(--white); border-radius: 2px; transition: transform .3s var(--ease), opacity .3s var(--ease); }
+  .hamburger.open span:nth-child(1){ transform: translateY(7px) rotate(45deg); }
+  .hamburger.open span:nth-child(2){ opacity:0; }
+  .hamburger.open span:nth-child(3){ transform: translateY(-7px) rotate(-45deg); }
+
+  .mobile-menu{
+    position: fixed; inset: 0 0 0 0; top: 68px; z-index: 190;
+    background: rgba(6,15,31,0.98);
+    backdrop-filter: blur(20px);
+    transform: translateY(-12px);
+    opacity: 0; pointer-events: none;
+    transition: opacity .3s var(--ease), transform .3s var(--ease);
+    padding: 32px 24px;
+  }
+  .mobile-menu.open{ opacity:1; transform: translateY(0); pointer-events:auto; }
+  .mobile-menu a{ display:block; font-size: 22px; font-weight:700; padding: 16px 4px; border-bottom: 1px solid var(--line); }
+  .mobile-menu .btn{ margin-top: 24px; width: 100%; }
+
+  /* ============================================================
+     HERO
+     ============================================================ */
+  .hero{
+    position: relative;
+    min-height: 100svh;
+    display:flex; flex-direction:column; align-items:center; justify-content:center;
+    text-align:center;
+    padding: 140px 24px 100px;
+    overflow: hidden;
+    background:
+      radial-gradient(ellipse 90% 60% at 50% 0%, rgba(13,122,69,0.30), transparent 60%),
+      radial-gradient(ellipse 70% 50% at 85% 90%, rgba(232,185,59,0.14), transparent 60%),
+      linear-gradient(180deg, var(--navy-deep) 0%, var(--navy) 55%, var(--navy-deep) 100%);
+  }
+  /* stadium light sweep + subtle pitch-line texture, pure CSS */
+  .hero::before{
+    content:"";
+    position:absolute; inset:-20% -20%;
+    background-image:
+      repeating-linear-gradient(115deg, rgba(245,247,251,0.035) 0px, rgba(245,247,251,0.035) 1px, transparent 1px, transparent 90px);
+    animation: driftLines 40s linear infinite;
+    pointer-events:none;
+  }
+  @keyframes driftLines{ from{ transform: translate(0,0); } to{ transform: translate(-90px,-60px); } }
+
+  .stadium-glow{
+    position:absolute; top: -10%; left:50%; width: 160%; height: 60%;
+    transform: translateX(-50%);
+    background: conic-gradient(from 200deg at 50% 0%, transparent 0deg, rgba(247,210,100,0.10) 40deg, transparent 90deg, transparent 270deg, rgba(23,168,98,0.10) 320deg, transparent 360deg);
+    filter: blur(30px);
+    animation: sweep 18s ease-in-out infinite alternate;
+    pointer-events:none;
+  }
+  @keyframes sweep{ from{ opacity:.5; transform: translateX(-52%) rotate(-2deg);} to{ opacity:1; transform: translateX(-48%) rotate(2deg);} }
+
+  .particles{ position:absolute; inset:0; pointer-events:none; }
+  .particle{
+    position:absolute; width:3px; height:3px; border-radius:50%;
+    background: var(--gold-bright); opacity:.35;
+    animation: floatUp linear infinite;
+  }
+  @keyframes floatUp{
+    from{ transform: translateY(0) scale(1); opacity:0; }
+    10%{ opacity:.5; }
+    90%{ opacity:.35; }
+    to{ transform: translateY(-100vh) scale(1.4); opacity:0; }
+  }
+
+  .hero-content{ position:relative; z-index:2; max-width: 900px; display:flex; flex-direction:column; align-items:center; }
+
+  .logo-row{ display:flex; align-items:center; justify-content:center; gap: 22px; margin-bottom: 28px; }
+  .logo-row img{
+    height: 56px; width:56px; object-fit:cover; border-radius: 14px;
+    background: rgba(245,247,251,0.06); border: 1px solid var(--line);
+    padding: 6px;
+  }
+  .logo-divider{ width:1px; height: 30px; background: var(--line); }
+
+  .kicker{
+    font-family: var(--font-mono); font-size: 13px; letter-spacing: 0.3em;
+    text-transform: uppercase; color: var(--gray);
+  }
+  .kicker b{ color: var(--gold-bright); font-weight:600; }
+
+  .hero h1.brand-line{
+    font-family: var(--font-display); font-weight:400; text-transform:uppercase;
+    font-size: clamp(20px, 3vw, 28px); letter-spacing: 0.08em; color: var(--white);
+    margin-top: 14px; opacity: .85;
+  }
+  .hero .headline{
+    font-family: var(--font-display); font-weight:400; text-transform:uppercase;
+    font-size: clamp(48px, 9vw, 108px); line-height: 0.96; letter-spacing: 0.005em;
+    margin-top: 12px;
+    background: linear-gradient(180deg, #ffffff 0%, #ffffff 55%, var(--gold-bright) 100%);
+    -webkit-background-clip: text; background-clip:text; color:transparent;
+  }
+  .hero .headline .accent{
+    background: linear-gradient(135deg, var(--gold-bright), var(--gold));
+    -webkit-background-clip: text; background-clip:text; color:transparent;
+  }
+
+  .hero-desc{
+    margin-top: 26px; font-size: clamp(15px,1.7vw,18px); color: var(--gray);
+    max-width: 560px; line-height: 1.7;
+  }
+
+  .stage-pill{
+    margin-top: 30px;
+    display:inline-flex; align-items:center; gap:10px;
+    padding: 10px 22px; border-radius: 999px;
+    background: rgba(245,247,251,0.05);
+    border: 1px solid var(--line);
+    font-family: var(--font-mono); font-size: 13px; letter-spacing: 0.08em; text-transform:uppercase;
+  }
+  .stage-pill .dot{ width:7px; height:7px; border-radius:50%; background: var(--green-bright); box-shadow: 0 0 10px var(--green-bright); animation: pulse 1.6s ease-in-out infinite; }
+  @keyframes pulse{ 0%,100%{ opacity:1;} 50%{ opacity:.35;} }
+
+  .hero-cta{ margin-top: 40px; display:flex; gap:16px; flex-wrap:wrap; justify-content:center; }
+  .hero-cta .btn-primary{ font-size: 17px; padding: 19px 42px; }
+
+  .scroll-cue{
+    position:absolute; bottom: 28px; left:50%; transform: translateX(-50%);
+    display:flex; flex-direction:column; align-items:center; gap:8px;
+    color: var(--gray); font-family: var(--font-mono); font-size: 11px; letter-spacing:.2em; text-transform:uppercase;
+    z-index:2;
+  }
+  .scroll-cue .line{ width:1px; height: 30px; background: linear-gradient(var(--gold-bright), transparent); animation: scrollLine 1.8s ease-in-out infinite; }
+  @keyframes scrollLine{ 0%{ transform: scaleY(0); transform-origin: top;} 50%{ transform: scaleY(1); transform-origin: top;} 51%{ transform-origin: bottom;} 100%{ transform: scaleY(0); transform-origin: bottom;} }
+
+  /* ============================================================
+     SHARED SECTION LAYOUT
+     ============================================================ */
+  section{ position: relative; padding: var(--space-xl) 0; }
+  .section-head{ text-align:center; max-width: 620px; margin: 0 auto var(--space-lg); }
+  .section-head p{ color: var(--gray); margin-top: 14px; font-size: 16px; }
+
+  #prediction{ background: linear-gradient(180deg, var(--navy-deep), var(--navy) 40%, var(--navy-deep)); }
+
+  /* ============================================================
+     PREDICTION CARDS
+     ============================================================ */
+  .match-grid{
+    display:flex; flex-wrap:wrap; gap: 28px; justify-content:center; align-items:stretch;
+  }
+  .match-card{
+    position:relative;
+    background: linear-gradient(165deg, rgba(19,42,74,0.85), rgba(10,25,48,0.85));
+    border: 1px solid var(--line);
+    border-radius: var(--radius-lg);
+    padding: 36px 32px 32px;
+    width: 100%;
+    max-width: 440px;
+    backdrop-filter: blur(18px) saturate(140%);
+    -webkit-backdrop-filter: blur(18px) saturate(140%);
+    box-shadow: 0 30px 60px -30px rgba(0,0,0,0.6);
+    display:flex; flex-direction:column; align-items:center; gap: 22px;
+    transition: transform .4s var(--ease), box-shadow .4s var(--ease), border-color .4s var(--ease);
+  }
+  .match-card::before{
+    content:""; position:absolute; inset:0; border-radius: inherit; padding:1px;
+    background: linear-gradient(135deg, rgba(232,185,59,0.5), transparent 40%, transparent 60%, rgba(23,168,98,0.35));
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor; mask-composite: exclude;
+    pointer-events:none;
+  }
+  .match-card:hover{ transform: translateY(-6px); box-shadow: 0 40px 70px -28px rgba(0,0,0,0.7); }
+
+  .match-stage{
+    font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--gold-bright);
+  }
+
+  .teams-row{ display:flex; align-items:center; justify-content:center; gap: 20px; width:100%; }
+  .team{ display:flex; flex-direction:column; align-items:center; gap:10px; flex:1; min-width:0; }
+  .team img{ width: 64px; height: 64px; border-radius: 50%; object-fit:cover; border: 2px solid var(--line); background: var(--navy-card); }
+  .team-name{ font-weight:700; font-size: 15px; text-align:center; overflow-wrap:anywhere; }
+  .vs-badge{
+    font-family: var(--font-display); font-size: 22px; color: var(--navy-deep);
+    background: linear-gradient(135deg, var(--gold-bright), var(--gold));
+    width: 46px; height:46px; border-radius:50%;
+    display:flex; align-items:center; justify-content:center;
+    box-shadow: 0 0 24px rgba(232,185,59,0.45);
+    flex-shrink:0;
+  }
+
+  .close-info{
+    font-family: var(--font-mono); font-size: 13px; color: var(--gray); text-align:center;
+    display:flex; flex-direction:column; gap:4px;
+  }
+  .close-info b{ color: var(--white); font-weight:600; }
+
+  .match-card .btn{ width:100%; margin-top: 4px; }
+
+  /* ============================================================
+     FLOATING CTA
+     ============================================================ */
+  .floating-cta{
+    position: fixed; bottom: 26px; right: 26px; z-index: 150;
+    width: 64px; height: 64px; border-radius: 50%;
+    background: linear-gradient(135deg, var(--green-bright), var(--green));
+    display:flex; align-items:center; justify-content:center;
+    box-shadow: 0 12px 30px -8px rgba(23,168,98,0.7);
+    font-size: 26px;
+    animation: floatBob 2.8s ease-in-out infinite;
+    transition: transform .3s var(--ease);
+  }
+  .floating-cta:hover{ transform: scale(1.08); }
+  @keyframes floatBob{ 0%,100%{ transform: translateY(0);} 50%{ transform: translateY(-8px);} }
+  .floating-cta::after{
+    content:""; position:absolute; inset:-6px; border-radius:50%;
+    border: 2px solid rgba(23,168,98,0.4);
+    animation: ringPulse 2.2s ease-out infinite;
+  }
+  @keyframes ringPulse{ 0%{ transform: scale(0.9); opacity:1;} 100%{ transform: scale(1.5); opacity:0;} }
+
+  /* ============================================================
+     SPONSORS
+     ============================================================ */
+  #sponsors{ background: var(--navy-deep); }
+  .sponsor-grid{ display:grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 24px; }
+  .sponsor-card{
+    background: rgba(245,247,251,0.03);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-md);
+    padding: 30px 26px;
+    display:flex; flex-direction:column; gap: 14px; height:100%;
+    transition: transform .35s var(--ease), box-shadow .35s var(--ease), border-color .35s var(--ease), background .35s var(--ease);
+  }
+  .sponsor-card:hover{
+    transform: translateY(-6px);
+    border-color: rgba(232,185,59,0.4);
+    box-shadow: 0 24px 50px -24px rgba(232,185,59,0.25);
+    background: rgba(245,247,251,0.05);
+  }
+.sponsor-logo{
+    width: 90px;
+    height: 90px;
+    border-radius: 12px;
+    object-fit: contain; /* Better for logos */
+    background: var(--navy-card);
+    border: 1px solid var(--line);
+    padding: 8px; /* Optional: adds some spacing around the logo */
+}  .sponsor-name{ font-size: 18px; font-weight:700; }
+  .sponsor-tagline{ color: var(--gray); font-size: 14px; line-height:1.6; flex-grow:1; }
+  .sponsor-visiting-card{ display:flex; flex-direction:column; gap: 10px; }
+  .sponsor-visiting-card img{
+    width: 100%; aspect-ratio: 7 / 4; object-fit: cover;
+    border-radius: var(--radius-sm); border: 1px solid var(--line);
+    background: var(--navy-card);
+  }
+  .sponsor-meta{ font-family: var(--font-mono); font-size: 12.5px; color: var(--gray); display:flex; flex-direction:column; gap:6px; padding-top: 10px; border-top: 1px solid var(--line); }
+  .sponsor-links{ display:flex; gap: 10px; margin-top: 6px; }
+  .sponsor-links a{
+    width: 36px; height:36px; border-radius:50%; background: rgba(245,247,251,0.06);
+    display:flex; align-items:center; justify-content:center; font-size:15px;
+    border: 1px solid var(--line); transition: background .25s var(--ease), transform .25s var(--ease);
+  }
+  .sponsor-links a:hover{ background: var(--green); transform: translateY(-2px); }
+
+  /* ============================================================
+     RULES
+     ============================================================ */
+  #rules{ background: linear-gradient(180deg, var(--navy-deep), var(--navy)); }
+  .rules-list{ max-width: 720px; margin: 0 auto; display:flex; flex-direction:column; gap: 4px; }
+  .rule-item{
+    display:flex; align-items:flex-start; gap: 20px;
+    padding: 22px 8px; border-bottom: 1px solid var(--line);
+  }
+  .rule-item:last-child{ border-bottom:none; }
+  .rule-icon{
+    flex-shrink:0; width: 42px; height:42px; border-radius:50%;
+    background: rgba(23,168,98,0.12); border: 1px solid rgba(23,168,98,0.35);
+    display:flex; align-items:center; justify-content:center; font-size: 18px;
+  }
+  .rule-text{ font-size: 16px; color: var(--white); padding-top: 8px; }
+  .rule-text b{ color: var(--gold-bright); }
+
+  /* ============================================================
+     FOOTER
+     ============================================================ */
+  footer{
+    background: var(--navy-deep);
+    border-top: 1px solid var(--line);
+    padding: var(--space-lg) 0 var(--space-md);
+  }
+  .footer-top{
+    display:flex; flex-wrap:wrap; gap: 32px; align-items:center; justify-content:space-between;
+    padding-bottom: var(--space-md); margin-bottom: var(--space-md);
+    border-bottom: 1px solid var(--line);
+  }
+  .footer-brand{ font-family: var(--font-display); font-size: 22px; text-transform:uppercase; letter-spacing:.03em; }
+  .footer-social{ display:flex; gap: 12px; }
+  .footer-social a{
+    width: 42px; height:42px; border-radius:50%; background: rgba(245,247,251,0.05);
+    border: 1px solid var(--line); display:flex; align-items:center; justify-content:center;
+    font-size: 17px; transition: background .25s var(--ease), transform .25s var(--ease);
+  }
+  .footer-social a:hover{ background: var(--gold); color: var(--navy-deep); transform: translateY(-2px); }
+  .footer-bottom{ display:flex; flex-wrap:wrap; gap: 12px; justify-content:space-between; color: var(--gray); font-size: 13.5px; }
+  .footer-bottom .heart{ color: var(--gold-bright); }
+
+  /* ============================================================
+     RESPONSIVE
+     ============================================================ */
+  @media (max-width: 860px){
+    .nav-links, .nav-cta .btn-primary{ display:none; }
+    .hamburger{ display:flex; }
+    .logo-row img{ height:44px; width:44px; }
+  }
+  @media (max-width: 480px){
+    .hero{ padding-top: 120px; }
+    .teams-row{ gap: 10px; }
+    .team img{ width:52px; height:52px; }
+    .floating-cta{ width: 56px; height:56px; font-size:22px; bottom:18px; right:18px; }
+  }
+
+  /* lazy image fade-in */
+  img[loading="lazy"]{ opacity:0; transition: opacity .5s var(--ease); }
+  img.loaded{ opacity:1; }
+
+  .reveal{ opacity:0; transform: translateY(24px); transition: opacity .7s var(--ease), transform .7s var(--ease); }
+  .reveal.in{ opacity:1; transform: translateY(0); }
+</style>
 </head>
-<body class="antialiased font-sans relative selection:bg-green selection:text-white">
+<body>
 
-    <!-- Ambient Background -->
-    <div class="ambient-glow glow-1 animate-blob"></div>
-    <div class="ambient-glow glow-2 animate-blob" style="animation-delay: 2s;"></div>
-    <div class="ambient-glow glow-3 animate-blob" style="animation-delay: 4s;"></div>
+<!-- ============================================================
+     NAVIGATION
+     ============================================================ -->
+<nav class="navbar" id="navbar" aria-label="Primary">
+  <div class="container nav-inner">
+    <div class="nav-brand">
+      <img id="navChurchLogo" alt="Church logo" loading="lazy">
+      <span class="nav-brand-text">KCYM SMYM Mattara</span>
+    </div>
+    <div class="nav-links" role="menu">
+      <a href="#home" role="menuitem">Home</a>
+      <a href="#prediction" role="menuitem">Prediction</a>
+      <a href="#sponsors" role="menuitem">Sponsors</a>
+      <a href="#rules" role="menuitem">Rules</a>
+    </div>
+    <div class="nav-cta">
+      <a href="#prediction" class="btn btn-primary">Predict Now</a>
+      <button class="hamburger" id="hamburgerBtn" aria-label="Open menu" aria-expanded="false" aria-controls="mobileMenu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</nav>
 
-    <!-- Main Container -->
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-12 pb-24">
-        
-        <!-- HERO SECTION -->
-        <header class="text-center mb-24 relative">
-            
-            <!-- Hero Banner Image -->
-            <div class="relative w-full max-w-5xl mx-auto rounded-3xl overflow-hidden mb-12 shadow-2xl reveal-up group border border-white/10" style="aspect-ratio: 21/9;">
-                <div class="absolute inset-0 bg-gradient-to-t from-navy/80 to-transparent z-10"></div>
-                <img src="banner.png" 
-                     alt="FIFA World Cup Stadium" 
-                     class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
-                
-                <!-- Overlay Badge -->
-                <div class="absolute bottom-6 left-6 z-20 text-left">
-                    <span class="px-4 py-1.5 rounded-full bg-gold/90 text-navy font-bold text-sm uppercase tracking-wider mb-2 inline-block backdrop-blur-sm">
-                        2026 Edition
-                    </span>
-                </div>
-            </div>
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#home">Home</a>
+  <a href="#prediction">Prediction</a>
+  <a href="#sponsors">Sponsors</a>
+  <a href="#rules">Rules</a>
+  <a href="#prediction" class="btn btn-primary">Predict Now</a>
+</div>
 
-            <!-- Hero Content -->
-            <div class="max-w-3xl mx-auto px-2">
-                <p class="text-gold font-bold tracking-[0.2em] uppercase text-sm md:text-base mb-4 reveal-up" style="transition-delay: 100ms;">
-                    KCYM Mattara Presents
-                </p>
-                <h1 class="font-heading text-4xl md:text-5xl lg:text-7xl font-black mb-6 leading-tight reveal-up" style="transition-delay: 200ms;">
-                    FIFA World Cup <br/>
-                    <span class="text-gradient-green">Prediction Challenge</span>
-                </h1>
-                <p class="text-gray-300 text-base md:text-lg lg:text-xl mb-10 leading-relaxed max-w-2xl mx-auto reveal-up" style="transition-delay: 300ms;">
-                    Think you know football? Predict the match results, compete with your friends, and stand a chance to win exciting cash prizes. Submit your prediction before kickoff!
-                </p>
-                
-                <!-- Interactive CTA Button -->
-                <div class="reveal-up" style="transition-delay: 400ms;">
-                    <a href="https://forms.gle/aaj2p9zVcP84GSYM8" target="_blank" rel="noopener noreferrer" 
-                       class="relative inline-flex items-center justify-center px-8 py-4 text-lg font-bold text-white transition-all duration-300 bg-gradient-to-r from-green to-green-light rounded-full shadow-[0_0_20px_rgba(22,192,111,0.4)] hover:shadow-[0_0_35px_rgba(244,197,66,0.5)] hover:scale-105 group overflow-hidden border-2 border-gold/50 hover:border-gold">
-                        <span class="absolute inset-0 w-full h-full -mt-1 rounded-lg opacity-30 bg-gradient-to-b from-transparent via-transparent to-black"></span>
-                        <span class="relative flex items-center gap-2 font-heading tracking-wide">
-                            <svg class="w-6 h-6 animate-bounce" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-                            Predict Now
-                        </span>
-                    </a>
-                </div>
-            </div>
-        </header>
+<!-- ============================================================
+     HERO
+     ============================================================ -->
+<header class="hero" id="home">
+  <div class="stadium-glow" aria-hidden="true"></div>
+  <div class="particles" id="particles" aria-hidden="true"></div>
 
-        <!-- SPONSORS SECTION -->
-        <section id="sponsors" class="mb-24">
-            <div class="text-center mb-16 reveal-up">
-                <h2 class="font-heading text-3xl md:text-4xl font-extrabold mb-4">
-                    Our <span class="text-gold">Sponsors</span>
-                </h2>
-                <div class="h-1 w-24 bg-gradient-to-r from-green to-gold mx-auto rounded-full"></div>
-            </div>
-            
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                
-                <!-- Sponsor 1 -->
-                <div class="glass-panel glass-card-hover rounded-3xl p-8 flex flex-col items-center text-center reveal-up">
-                    <div class="w-24 h-24 rounded-full bg-white/5 border border-white/10 flex items-center justify-center mb-6 shadow-inner text-gold group-hover:scale-110 transition-transform duration-300">
-                        <svg class="w-12 h-12" viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-                    </div>
-                    <h4 class="font-heading font-bold text-xl mb-3 text-white">Premium Sports Co.</h4>
-                    <p class="text-gray-400 text-sm leading-relaxed">Your ultimate destination for professional sporting gear and authentic football accessories.</p>
-                </div>
-                
-                <!-- Sponsor 2 -->
-                <div class="glass-panel glass-card-hover rounded-3xl p-8 flex flex-col items-center text-center reveal-up" style="transition-delay: 150ms;">
-                    <div class="w-24 h-24 rounded-full bg-white/5 border border-white/10 flex items-center justify-center mb-6 shadow-inner text-gold group-hover:scale-110 transition-transform duration-300">
-                        <svg class="w-12 h-12" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" stroke-width="2"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" fill="none" stroke="currentColor" stroke-width="2"/><path d="M2 12h20" fill="none" stroke="currentColor" stroke-width="2"/></svg>
-                    </div>
-                    <h4 class="font-heading font-bold text-xl mb-3 text-white">Global Tech Solutions</h4>
-                    <p class="text-gray-400 text-sm leading-relaxed">Empowering local businesses with next-generation digital technology and connectivity.</p>
-                </div>
-                
-                <!-- Sponsor 3 -->
-                <div class="glass-panel glass-card-hover rounded-3xl p-8 flex flex-col items-center text-center reveal-up" style="transition-delay: 300ms;">
-                    <div class="w-24 h-24 rounded-full bg-white/5 border border-white/10 flex items-center justify-center mb-6 shadow-inner text-gold group-hover:scale-110 transition-transform duration-300">
-                        <svg class="w-12 h-12" viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" fill="none" stroke="currentColor" stroke-width="2"/><polyline points="9 22 9 12 15 12 15 22" fill="none" stroke="currentColor" stroke-width="2"/></svg>
-                    </div>
-                    <h4 class="font-heading font-bold text-xl mb-3 text-white">Mattara Traders</h4>
-                    <p class="text-gray-400 text-sm leading-relaxed">Proudly supporting community events and local youth sports initiatives across the region.</p>
-                </div>
-
-            </div>
-        </section>
-
-        <!-- RULES & PRIZES SECTION -->
-        <section id="info" class="mb-12">
-            <div class="grid grid-cols-1 lg:grid-cols-5 gap-8">
-                
-                <!-- Rules Card -->
-                <div class="lg:col-span-3 glass-panel rounded-3xl p-8 md:p-10 reveal-up relative overflow-hidden">
-                    <div class="absolute -right-10 -top-10 opacity-5">
-                        <svg class="w-64 h-64" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-1-13h2v6h-2zm0 8h2v2h-2z"/></svg>
-                    </div>
-                    
-                    <h3 class="font-heading text-2xl md:text-3xl font-bold text-green-light mb-8 flex items-center gap-3">
-                        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-                        Prediction Rules
-                    </h3>
-                    
-                    <ul class="space-y-4 text-gray-300 md:text-lg">
-                        <li class="flex items-start gap-3">
-                            <span class="text-gold mt-1">⚽</span>
-                            <span><strong>One Entry Only:</strong> Strictly one prediction per participant is allowed.</span>
-                        </li>
-                        <li class="flex items-start gap-3">
-                            <span class="text-gold mt-1">⚽</span>
-                            <span><strong>Timing is Key:</strong> Submit your prediction before the official match kickoff time.</span>
-                        </li>
-                        <li class="flex items-start gap-3">
-                            <span class="text-gold mt-1">⚽</span>
-                            <span><strong>No Late Entries:</strong> Forms submitted after kickoff will be automatically disqualified.</span>
-                        </li>
-                        <li class="flex items-start gap-3">
-                            <span class="text-gold mt-1">⚽</span>
-                            <span><strong>Results:</strong> Winners will be announced immediately after each knockout stage concludes.</span>
-                        </li>
-                        <li class="flex items-start gap-3">
-                            <span class="text-gold mt-1">⚽</span>
-                            <span><strong>Final Say:</strong> The decision of the KCYM Mattara committee is final and binding.</span>
-                        </li>
-                    </ul>
-                </div>
-
-                <!-- Prize Card -->
-                <div class="lg:col-span-2 rounded-3xl p-8 md:p-10 text-center flex flex-col items-center justify-center reveal-up border border-gold/30 relative overflow-hidden" 
-                     style="background: linear-gradient(145deg, rgba(244, 197, 66, 0.1), rgba(8, 27, 51, 0.6)); transition-delay: 200ms;">
-                    
-                    <!-- Shine effect on background -->
-                    <div class="absolute inset-0 bg-gradient-to-tr from-transparent via-white/5 to-transparent -translate-x-full group-hover:animate-[shimmer_2s_infinite]"></div>
-
-                    <h3 class="font-heading text-2xl md:text-3xl font-bold text-gold mb-6 relative z-10">
-                        Exciting Cash Prizes
-                    </h3>
-                    
-                    <div class="animate-float mb-8 relative z-10">
-                        <!-- Enhanced Trophy SVG with Glow Filter -->
-                        <svg class="w-32 h-32 md:w-40 md:h-40 drop-shadow-[0_10px_20px_rgba(244,197,66,0.4)]" viewBox="0 0 24 24" fill="#F4C542" xmlns="http://www.w3.org/2000/svg">
-                            <defs>
-                                <linearGradient id="goldGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                                    <stop offset="0%" stop-color="#F9DB82" />
-                                    <stop offset="50%" stop-color="#F4C542" />
-                                    <stop offset="100%" stop-color="#D4A017" />
-                                </linearGradient>
-                            </defs>
-                            <path fill="url(#goldGradient)" d="M19 4H17V3C17 2.45 16.55 2 16 2H8C7.45 2 7 2.45 7 3V4H5C3.9 4 3 4.9 3 6V8C3 10.65 5.03 12.83 7.63 12.98C8.25 14.73 9.87 16 11.83 16V19H9C8.45 19 8 19.45 8 20V22H16V20C16 19.45 15.55 19 15 19H12.17V16C14.13 16 15.75 14.73 16.37 12.98C18.97 12.83 21 10.65 21 8V6C21 4.9 20.1 4 19 4ZM5 8V6H7V11C5.9 11 5 10.1 5 8ZM19 8C19 10.1 18.1 11 17 11V6H19V8Z"/>
-                        </svg>
-                    </div>
-                    
-                    <div class="relative z-10">
-                        <p class="text-xl font-semibold text-white mb-2">🏆 Winners Take All</p>
-                        <p class="text-gray-400 text-sm">Massive cash rewards sponsored by our partners. Exact prize pool announced soon!</p>
-                    </div>
-                </div>
-
-            </div>
-        </section>
+  <div class="hero-content">
+    <div class="logo-row">
+      <img id="heroChurchLogo" alt="Church logo" loading="lazy">
+      <span class="logo-divider"></span>
+      <img id="heroKcymLogo" alt="KCYM logo" loading="lazy">
+      <span class="logo-divider"></span>
+      <img id="heroSmymLogo" alt="SMYM logo" loading="lazy">
     </div>
 
-    <!-- FOOTER -->
-    <footer class="border-t border-white/10 bg-gradient-to-t from-black/80 to-transparent pt-16 pb-8 relative z-10 mt-10">
-        <div class="max-w-7xl mx-auto px-4 text-center reveal-up">
-            <h2 class="font-heading text-2xl font-black text-white mb-2">KCYM Mattara</h2>
-            <p class="text-green-light font-medium mb-8">United by Faith, Driven by Passion.</p>
-            
-            <div class="flex justify-center gap-6 mb-10">
-                <!-- Social Links with Hover Effects -->
-                <a href="#" class="w-12 h-12 rounded-full bg-white/5 border border-white/10 flex items-center justify-center transition-all duration-300 hover:bg-gold hover:border-gold hover:-translate-y-1 hover:shadow-[0_10px_20px_rgba(244,197,66,0.3)] group" aria-label="Instagram">
-                    <svg class="w-5 h-5 fill-white group-hover:fill-navy transition-colors duration-300" viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" ry="5" fill="none" stroke="currentColor" stroke-width="2"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" fill="none" stroke="currentColor" stroke-width="2"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5" stroke="currentColor" stroke-width="2"></line></svg>
-                </a>
-                <a href="#" class="w-12 h-12 rounded-full bg-white/5 border border-white/10 flex items-center justify-center transition-all duration-300 hover:bg-gold hover:border-gold hover:-translate-y-1 hover:shadow-[0_10px_20px_rgba(244,197,66,0.3)] group" aria-label="Facebook">
-                    <svg class="w-5 h-5 fill-white group-hover:fill-navy transition-colors duration-300" viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3.81l.39-4h-4.2V7a1 1 0 0 1 1-1h3z" fill="none" stroke="currentColor" stroke-width="2"></path></svg>
-                </a>
-                <a href="#" class="w-12 h-12 rounded-full bg-white/5 border border-white/10 flex items-center justify-center transition-all duration-300 hover:bg-gold hover:border-gold hover:-translate-y-1 hover:shadow-[0_10px_20px_rgba(244,197,66,0.3)] group" aria-label="WhatsApp">
-                    <svg class="w-6 h-6 fill-white group-hover:fill-navy transition-colors duration-300" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"></path></svg>
-                </a>
-            </div>
-            
-            <div class="text-gray-500 text-sm border-t border-white/5 pt-6">
-                &copy; 2026 KCYM Mattara. All rights reserved.
-            </div>
+    <p class="kicker">KCYM SMYM <b>MATTARA</b> PRESENTS</p>
+    <h1 class="headline">FIFA WORLD CUP<br><span class="accent">PREDICTION CHALLENGE</span></h1>
+
+    <p class="hero-desc">
+      Predict every knockout match, compete with fellow football fans,
+      and stand a chance to win exciting prizes.
+    </p>
+
+    <div class="stage-pill"><span class="dot"></span> <span id="stageLabel">Starting from Round of 16</span></div>
+
+    <div class="hero-cta">
+      <a href="#prediction" class="btn btn-primary">⚽ Predict Now</a>
+      <a href="#prediction" class="btn btn-ghost">View Matches</a>
+    </div>
+  </div>
+
+  <div class="scroll-cue"><span>Scroll</span><span class="line"></span></div>
+</header>
+
+<!-- ============================================================
+     CURRENT PREDICTION
+     ============================================================ -->
+<section id="prediction">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">Live Now</span>
+      <h2 class="section-title">Current Prediction</h2>
+      <p>Lock in your call before kickoff. Every knockout match counts.</p>
+    </div>
+    <div class="match-grid" id="matchGrid"><!-- injected by JS from CONFIG.matches --></div>
+  </div>
+</section>
+
+<!-- ============================================================
+     SPONSORS
+     ============================================================ -->
+<section id="sponsors">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">With Thanks To</span>
+      <h2 class="section-title">Our Sponsors</h2>
+      <p>This tournament runs on the generosity of our parish community &amp; local businesses.</p>
+    </div>
+    <div class="sponsor-grid" id="sponsorGrid"><!-- injected by JS from CONFIG.sponsors --></div>
+  </div>
+</section>
+
+<!-- ============================================================
+     RULES
+     ============================================================ -->
+<section id="rules">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">Fair Play</span>
+      <h2 class="section-title">Rules</h2>
+    </div>
+    <div class="rules-list reveal">
+      <div class="rule-item">
+        <div class="rule-icon" aria-hidden="true">1️⃣</div>
+        <p class="rule-text"><b>One prediction</b> per participant, per match.</p>
+      </div>
+      <div class="rule-item">
+        <div class="rule-icon" aria-hidden="true">⏱️</div>
+        <p class="rule-text">Predictions <b>close before kickoff</b> — set your reminders.</p>
+      </div>
+      <div class="rule-item">
+        <div class="rule-icon" aria-hidden="true">🚫</div>
+        <p class="rule-text"><b>Late entries</b> are automatically rejected.</p>
+      </div>
+      <div class="rule-item">
+        <div class="rule-icon" aria-hidden="true">⚖️</div>
+        <p class="rule-text">The <b>organisers' decision</b> is final.</p>
+      </div>
+      <div class="rule-item">
+        <div class="rule-icon" aria-hidden="true">🏆</div>
+        <p class="rule-text"><b>Enjoy the tournament!</b></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     FLOATING CTA
+     ============================================================ -->
+<a href="#prediction" class="floating-cta" aria-label="Go to prediction section">⚽</a>
+
+<!-- ============================================================
+     FOOTER
+     ============================================================ -->
+<footer>
+  <div class="container">
+    <div class="footer-top">
+      <div class="footer-brand">KCYM SMYM Mattara</div>
+      <div class="footer-social">
+        <a href="#" aria-label="Instagram">📷</a>
+        <a href="#" aria-label="Facebook">📘</a>
+        <a href="#" aria-label="WhatsApp">💬</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© <span id="year"></span> KCYM SMYM Mattara. All rights reserved.</span>
+      <span>Made with <span class="heart">❤️</span> by KCYM SMYM Mattara</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+/* ================================================================
+   CONFIGURATION
+   Edit only this object to update matches, sponsors, and links.
+   The rest of the site renders automatically from these values.
+   ================================================================ */
+const CONFIG = {
+  churchLogo: "https://placehold.co/100x100/0a1930/e8b93b?text=%E2%9C%9D&font=montserrat",
+  kcymLogo:   "https://placehold.co/100x100/0a1930/17a862?text=KCYM&font=montserrat",
+  smymLogo:   "https://placehold.co/100x100/0a1930/e8b93b?text=SMYM&font=montserrat",
+
+  // SAMPLE Google Form link — replace with your real form URL (Forms > Send > copy short link)
+  googleForm: "https://forms.gle/8Xk3Qm5tRZ2vN9Hh7",
+  stage: "Round of 16",
+
+  matches: [
+    {
+      team1: "Argentina",
+      team2: "Germany",
+      flag1: "https://flagcdn.com/w160/ar.png",
+      flag2: "https://flagcdn.com/w160/de.png",
+      // SAMPLE per-match form link — replace with the real form for this match, or leave "" to fall back to googleForm above
+      formLink: "https://forms.gle/8Xk3Qm5tRZ2vN9Hh7",
+      closeTime: "5 July 2026 19:30:00"
+    },
+    {
+      team1: "Brazil",
+      team2: "France",
+      flag1: "https://flagcdn.com/w160/br.png",
+      flag2: "https://flagcdn.com/w160/fr.png",
+      formLink: "https://forms.gle/8Xk3Qm5tRZ2vN9Hh7",
+      closeTime: "6 July 2026 19:30:00"
+    }
+  ],
+
+  // Only one sponsor for now — add more objects to this array anytime to show more.
+  sponsors: [
+    {
+  logo: "Logo.webp",
+  cardFront: "visitting card  singnatur.webp",   // Replace with your exact filename
+  cardBack: "visitting card  singnature back.webp",     // Replace with your exact filename
+
+  name: "Sponsor Name",
+  tagline: "Proud supporter of parish youth sports.",
+  location: "Mattara, Kerala",
+  phone1: "+91 98765 43210",
+  phone2: "",
+  instagram: "",
+  website: ""
+}
+  ]
+};
+
+/* ================================================================
+   HELPERS
+   ================================================================ */
+function openForm(link){
+  window.open(link && link.trim() ? link : CONFIG.googleForm, "_blank", "noopener");
+}
+
+function formatCloseReadable(dateObj){
+  if(isNaN(dateObj.getTime())) return { date: "TBA", time: "" };
+  const date = dateObj.toLocaleDateString(undefined, { day:"numeric", month:"long", year:"numeric" });
+  const time = dateObj.toLocaleTimeString(undefined, { hour:"2-digit", minute:"2-digit" });
+  return { date, time };
+}
+
+/* ================================================================
+   RENDER: PREDICTION MATCH CARDS
+   ================================================================ */
+function renderMatches(){
+  const grid = document.getElementById("matchGrid");
+  document.getElementById("stageLabel").textContent = "Starting from " + CONFIG.stage;
+  grid.innerHTML = "";
+
+  CONFIG.matches.forEach((match, i) => {
+    const closeDate = new Date(match.closeTime);
+    const readable = formatCloseReadable(closeDate);
+
+    const card = document.createElement("article");
+    card.className = "match-card reveal";
+    card.innerHTML = `
+      <span class="match-stage">${CONFIG.stage}</span>
+      <div class="teams-row">
+        <div class="team">
+          <img src="${match.flag1}" alt="${match.team1} flag" loading="lazy">
+          <span class="team-name">${match.team1}</span>
         </div>
-    </footer>
+        <span class="vs-badge">VS</span>
+        <div class="team">
+          <img src="${match.flag2}" alt="${match.team2} flag" loading="lazy">
+          <span class="team-name">${match.team2}</span>
+        </div>
+      </div>
+      <div class="close-info">
+        <span>Prediction closes</span>
+        <span><b>${readable.date}</b> &middot; ${readable.time}</span>
+      </div>
+      <button class="btn btn-primary predict-btn" data-match="${i}">Predict Now</button>
+    `;
+    grid.appendChild(card);
+  });
+}
 
-    <!-- JAVASCRIPT FOR SCROLL ANIMATIONS -->
-    <script>
-        document.addEventListener("DOMContentLoaded", () => {
-            const observerOptions = {
-                root: null,
-                rootMargin: '0px',
-                threshold: 0.15
-            };
+/* ================================================================
+   RENDER: SPONSOR CARDS
+   ================================================================ */
+function renderSponsors(){
+  const grid = document.getElementById("sponsorGrid");
+  grid.innerHTML = "";
 
-            const observer = new IntersectionObserver((entries, observer) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('active');
-                        // Optional: unobserve if you only want the animation to happen once
-                        // observer.unobserve(entry.target);
-                    }
-                });
-            }, observerOptions);
+  CONFIG.sponsors.forEach(sponsor => {
+    const card = document.createElement("article");
+    card.className = "sponsor-card reveal";
 
-            // Select all elements with the 'reveal-up' class and observe them
-            const animateElements = document.querySelectorAll('.reveal-up');
-            animateElements.forEach(el => observer.observe(el));
-        });
-    </script>
+    let links = "";
+    if(sponsor.instagram) links += `<a href="${sponsor.instagram}" target="_blank" rel="noopener" aria-label="Instagram">📷</a>`;
+    if(sponsor.phone1) links += `<a href="https://wa.me/${sponsor.phone1.replace(/[^0-9]/g,"")}" target="_blank" rel="noopener" aria-label="WhatsApp">💬</a>`;
+    if(sponsor.website) links += `<a href="${sponsor.website}" target="_blank" rel="noopener" aria-label="Website">🌐</a>`;
+
+    const cardImages = (sponsor.cardFront || sponsor.cardBack) ? `
+      <div class="sponsor-visiting-card">
+        ${sponsor.cardFront ? `<img src="${sponsor.cardFront}" alt="${sponsor.name} visiting card front" loading="lazy">` : ""}
+        ${sponsor.cardBack ? `<img src="${sponsor.cardBack}" alt="${sponsor.name} visiting card back" loading="lazy">` : ""}
+      </div>` : "";
+
+    card.innerHTML = `
+      <img class="sponsor-logo" src="${sponsor.logo}" alt="${sponsor.name} logo" loading="lazy">
+      <h3 class="sponsor-name">${sponsor.name}</h3>
+      <p class="sponsor-tagline">${sponsor.tagline}</p>
+      ${cardImages}
+      <div class="sponsor-meta">
+        <span>📍 ${sponsor.location}</span>
+        <span>📞 ${sponsor.phone1}${sponsor.phone2 ? " / " + sponsor.phone2 : ""}</span>
+      </div>
+      ${links ? `<div class="sponsor-links">${links}</div>` : ""}
+    `;
+    grid.appendChild(card);
+  });
+}
+
+/* ================================================================
+   NAVBAR SCROLL STATE
+   ================================================================ */
+function initNavbarScroll(){
+  const nav = document.getElementById("navbar");
+  const onScroll = () => nav.classList.toggle("scrolled", window.scrollY > 20);
+  onScroll();
+  window.addEventListener("scroll", onScroll, { passive:true });
+}
+
+/* ================================================================
+   MOBILE MENU
+   ================================================================ */
+function initMobileMenu(){
+  const btn = document.getElementById("hamburgerBtn");
+  const menu = document.getElementById("mobileMenu");
+  btn.addEventListener("click", () => {
+    const isOpen = menu.classList.toggle("open");
+    btn.classList.toggle("open", isOpen);
+    btn.setAttribute("aria-expanded", String(isOpen));
+  });
+  menu.querySelectorAll("a, button").forEach(el => {
+    el.addEventListener("click", () => {
+      menu.classList.remove("open");
+      btn.classList.remove("open");
+      btn.setAttribute("aria-expanded", "false");
+    });
+  });
+}
+
+/* ================================================================
+   PREDICT NOW BUTTONS (event delegation, works for injected cards)
+   ================================================================ */
+function initPredictButtons(){
+  document.addEventListener("click", e => {
+    const trigger = e.target.closest(".predict-btn");
+    if(!trigger) return;
+    const idx = parseInt(trigger.dataset.match, 10);
+    const match = CONFIG.matches[idx];
+    openForm(match ? match.formLink : null);
+  });
+}
+
+/* ================================================================
+   AMBIENT PARTICLES (decorative, css-driven)
+   ================================================================ */
+function initParticles(){
+  const wrap = document.getElementById("particles");
+  const count = window.innerWidth < 600 ? 10 : 20;
+  for(let i=0;i<count;i++){
+    const p = document.createElement("span");
+    p.className = "particle";
+    p.style.left = Math.random()*100 + "%";
+    p.style.animationDuration = (10 + Math.random()*14) + "s";
+    p.style.animationDelay = (Math.random()*14) + "s";
+    wrap.appendChild(p);
+  }
+}
+
+/* ================================================================
+   SCROLL REVEAL
+   ================================================================ */
+function initReveal(){
+  const items = document.querySelectorAll(".reveal");
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if(entry.isIntersecting){ entry.target.classList.add("in"); io.unobserve(entry.target); }
+    });
+  }, { threshold: 0.15 });
+  items.forEach(item => io.observe(item));
+}
+
+/* ================================================================
+   LAZY IMAGE FADE-IN
+   ================================================================ */
+function initImageFade(){
+  document.querySelectorAll('img[loading="lazy"]').forEach(img => {
+    if(img.complete) img.classList.add("loaded");
+    else img.addEventListener("load", () => img.classList.add("loaded"));
+  });
+}
+
+/* ================================================================
+   INIT
+   ================================================================ */
+function applyStaticLogos(){
+  document.getElementById("navChurchLogo").src = CONFIG.churchLogo;
+  document.getElementById("heroChurchLogo").src = CONFIG.churchLogo;
+  document.getElementById("heroKcymLogo").src = CONFIG.kcymLogo;
+  document.getElementById("heroSmymLogo").src = CONFIG.smymLogo;
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+  document.getElementById("year").textContent = new Date().getFullYear();
+  applyStaticLogos();
+  renderMatches();
+  renderSponsors();
+  initNavbarScroll();
+  initMobileMenu();
+  initPredictButtons();
+  initParticles();
+  initReveal();
+  initImageFade();
+});
+</script>
 </body>
 </html>
