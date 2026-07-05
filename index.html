@@ -542,11 +542,11 @@
 
   <div class="hero-content">
     <div class="logo-row">
-      <img id="heroChurchLogo" alt="Church logo" loading="lazy">
+      <img src="./churchlogo.jpeg" id="heroChurchLogo" alt="Church logo" loading="lazy">
       <span class="logo-divider"></span>
-      <img id="heroKcymLogo" alt="KCYM logo" loading="lazy">
+      <img src="./kcymlogo.jpeg" id="heroKcymLogo" alt="KCYM logo" loading="lazy">
       <span class="logo-divider"></span>
-      <img id="heroSmymLogo" alt="SMYM logo" loading="lazy">
+      <img src="./smymlogo.jpeg" id="heroSmymLogo" alt="SMYM logo" loading="lazy">
     </div>
 
     <p class="kicker">KCYM SMYM <b>MATTARA</b> PRESENTS</p>
@@ -557,7 +557,7 @@
       and stand a chance to win exciting prizes.
     </p>
 
-    <div class="stage-pill"><span class="dot"></span> <span id="stageLabel">Starting from Round of 16</span></div>
+    <div class="stage-pill"><span class="dot"></span> <span id="stageLabel">Starting from Round of 8</span></div>
 
     <div class="hero-cta">
       <a href="#prediction" class="btn btn-primary">⚽ Predict Now</a>
@@ -662,31 +662,23 @@
    The rest of the site renders automatically from these values.
    ================================================================ */
 const CONFIG = {
-  churchLogo: "https://placehold.co/100x100/0a1930/e8b93b?text=%E2%9C%9D&font=montserrat",
-  kcymLogo:   "https://placehold.co/100x100/0a1930/17a862?text=KCYM&font=montserrat",
-  smymLogo:   "https://placehold.co/100x100/0a1930/e8b93b?text=SMYM&font=montserrat",
+  churchLogo: "churchlogo.jpeg",  // Replace with your exact filename
+  kcymLogo:   "kcymlogo.jpeg",  // Replace with your exact filename
+  smymLogo:   "smymlogo.jpeg",  // Replace with your exact filename
 
   // SAMPLE Google Form link — replace with your real form URL (Forms > Send > copy short link)
   googleForm: "https://forms.gle/8Xk3Qm5tRZ2vN9Hh7",
-  stage: "Round of 16",
+  stage: "Round of 8",
 
   matches: [
     {
-      team1: "Argentina",
-      team2: "Germany",
-      flag1: "https://flagcdn.com/w160/ar.png",
-      flag2: "https://flagcdn.com/w160/de.png",
+      team1: "France",
+      team2: "Morocco",
+      flag1: "https://flagcdn.com/w320/fr.png",
+flag2: "https://flagcdn.com/w320/ma.png",
       // SAMPLE per-match form link — replace with the real form for this match, or leave "" to fall back to googleForm above
-      formLink: "https://forms.gle/8Xk3Qm5tRZ2vN9Hh7",
-      closeTime: "5 July 2026 19:30:00"
-    },
-    {
-      team1: "Brazil",
-      team2: "France",
-      flag1: "https://flagcdn.com/w160/br.png",
-      flag2: "https://flagcdn.com/w160/fr.png",
-      formLink: "https://forms.gle/8Xk3Qm5tRZ2vN9Hh7",
-      closeTime: "6 July 2026 19:30:00"
+      formLink: "https://forms.gle/TxfhoV3fWRHE1KVo6",
+      closeTime: "10 July 2026 12:30:00 am"
     }
   ],
 
@@ -697,13 +689,13 @@ const CONFIG = {
   cardFront: "visitting card  singnatur.webp",   // Replace with your exact filename
   cardBack: "visitting card  singnature back.webp",     // Replace with your exact filename
 
-  name: "Sponsor Name",
-  tagline: "Proud supporter of parish youth sports.",
-  location: "Mattara, Kerala",
-  phone1: "+91 98765 43210",
-  phone2: "",
-  instagram: "",
-  website: ""
+  name: "SIGNATURE EVENT PLANNERS",
+  tagline: "Proud supporter of Mattara youth .",
+  location: "Ulikkal|Iritty|Kannur",
+  phone1: "+91 9656560613",
+  phone2: "+91 8848935878",
+  instagram: "https://www.instagram.com/signature_event_planner_s?igsh=MXQ3Y3ZuemMwMTQwaw==",
+  
 }
   ]
 };
