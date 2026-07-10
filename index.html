@@ -724,23 +724,15 @@ const CONFIG = {
 
   matches: [
     {
-      team1: "France",
-      team2: "Morocco",
-      flag1: "https://flagcdn.com/w320/fr.png",
-flag2: "https://flagcdn.com/w320/ma.png",
-      // SAMPLE per-match form link — replace with the real form for this match, or leave "" to fall back to googleForm above
-      formLink: "https://forms.gle/fnKKVEh6S4urkEG88",
-      closeTime: "10 July 2026 01:00:00 am"
-    },
-    {
-      team1: "Spain",
-      team2: "Belgium",
-      flag1: "https://flagcdn.com/w320/es.png",
-flag2: "https://flagcdn.com/w320/be.png",
-      // SAMPLE per-match form link — replace with the real form for this match, or leave "" to fall back to googleForm above
-      formLink: "prediction.html",
-      closeTime: "11 July 2026 12:00:00 am"
-    },
+  team1: "Spain",
+  team2: "Belgium",
+  flag1: "https://flagcdn.com/w320/es.png",
+  flag2: "https://flagcdn.com/w320/be.png",
+
+  formLink: "https://forms.gle/Sr393P2gUp96PVNX9",
+
+  closeTime: "11 July 2026 12:00:00 am"
+},
     {
       team1: "Norway",
       team2: "England",
@@ -971,6 +963,18 @@ document.addEventListener("DOMContentLoaded", () => {
   initReveal();
   initImageFade();
 });
+const now = new Date();
+
+const open = new Date(match.openTime);
+const close = new Date(match.closeTime);
+
+let predictionLink = "prediction.html";
+
+if (now >= open && now <= close) {
+    predictionLink = match.formLink;
+}
+
+document.getElementById("predictBtn").href = predictionLink;
 </script>
 </body>
 </html>
