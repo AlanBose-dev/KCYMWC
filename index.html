@@ -609,7 +609,7 @@
     </p>
 </div>
 
-    <div class="stage-pill"><span class="dot"></span> <span id="stageLabel">Starting from Semi Final </span></div>
+    <div class="stage-pill"><span class="dot"></span> <span id="stageLabel">Starting from  Final </span></div>
 
     <div class="hero-cta">
       <a href="#prediction" class="btn btn-primary">⚽ Predict Now</a>
@@ -774,7 +774,7 @@ function formatCloseReadable(dateObj){
    ================================================================ */
 function renderMatches(){
   const grid = document.getElementById("matchGrid");
-  document.getElementById("stageLabel").textContent = "Starting from " + CONFIG.stage;
+  document.getElementById("stageLabel").textContent =  + CONFIG.stage;
   grid.innerHTML = "";
 
   CONFIG.matches.forEach((match, i) => {
